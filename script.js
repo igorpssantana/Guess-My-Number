@@ -19,29 +19,36 @@ const checkNumber = document
   .addEventListener('click', function () {
     userKick = Number(document.querySelector('.guess').value);
 
-    if (userKick === numberToGuess) {
-      document.querySelector('body').classList.add('correct');
-      document.querySelector('.message').textContent = '🎉 Correct Number ! ';
-      document.querySelector('.number').textContent = numberToGuess;
-      document.querySelector('h1').textContent = 'You Guessed My Number 🙂 !';
-      if (
-        Number(document.querySelector('.highscore').textContent) <
-        Number(document.querySelector('.score').textContent)
-      ) {
-        document.querySelector('.highscore').textContent =
-          document.querySelector('.score').textContent;
-      }
-    } else {
-      if (userKick > numberToGuess && userKick <= 20) {
-        document.querySelector('.message').textContent = '📈 Too high !!!';
-        document.querySelector('.score').textContent -= 1;
-      } else if (userKick > 20) {
-        document.querySelector('.message').textContent = '⚠  Stay in the range';
+    if (userKick != '') {
+      if (userKick === numberToGuess) {
+        document.querySelector('body').classList.add('correct');
+        document.querySelector('.message').textContent = '🎉 Correct Number ! ';
+        document.querySelector('.number').textContent = numberToGuess;
+        document.querySelector('h1').textContent = 'You Guessed My Number 🙂 !';
+        if (
+          Number(document.querySelector('.highscore').textContent) <
+          Number(document.querySelector('.score').textContent)
+        ) {
+          document.querySelector('.highscore').textContent =
+            document.querySelector('.score').textContent;
+        }
       } else {
-        document.querySelector('.message').textContent = '📉 Too low!!!';
-        document.querySelector('.score').textContent -= 1;
+        if (userKick > numberToGuess && userKick <= 20) {
+          document.querySelector('.message').textContent = '📈 Too high !!!';
+          document.querySelector('.score').textContent -= 1;
+        } else if (userKick > 20) {
+          document.querySelector('.message').textContent =
+            '⚠  Stay in the range';
+        } else {
+          document.querySelector('.message').textContent = '📉 Too low!!!';
+          document.querySelector('.score').textContent -= 1;
+        }
+
+        if (Number(document.querySelector('.score').textContent) < 1) {
+          document.querySelector('.message').textContent = ' 😢 You lost!!!';
+        }
+        document.querySelector('.guess').value = '';
       }
-      document.querySelector('.guess').value = '';
     }
   });
 
