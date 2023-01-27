@@ -33,16 +33,13 @@ const checkNumber = document
             document.querySelector('.score').textContent;
         }
       } else {
-        if (userKick > numberToGuess && userKick <= 20) {
-          document.querySelector('.message').textContent = '📈 Too high !!!';
-          document.querySelector('.score').textContent -= 1;
-        } else if (userKick > 20) {
-          document.querySelector('.message').textContent =
-            '⚠  Stay in the range';
-        } else {
-          document.querySelector('.message').textContent = '📉 Too low!!!';
-          document.querySelector('.score').textContent -= 1;
-        }
+        document.querySelector('.message').textContent =
+          userKick > 20
+            ? '⚠  Stay in the range'
+            : (document.querySelector('.message').textContent =
+                userKick > numberToGuess ? '📈 Too high !!!' : '📉 Too low!!!');
+
+        document.querySelector('.score').textContent -= 1;
 
         if (Number(document.querySelector('.score').textContent) < 1) {
           document.querySelector('.message').textContent = ' 😢 You lost!!!';
